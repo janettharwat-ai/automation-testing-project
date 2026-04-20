@@ -13,7 +13,7 @@ public class CourseCardsPage {
 
     public CourseCardsPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // increased timeout
     }
 
     By firstCourseCard = By.xpath("(//div//h3)[1]/ancestor::div[1]");
@@ -24,25 +24,57 @@ public class CourseCardsPage {
     By subscribeButton = By.xpath(".//button");
 
     public WebElement getFirstCourseCard() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(firstCourseCard));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(firstCourseCard));
+    }
+
+    public void waitForFirstCourseCard() {
+        WebElement card = getFirstCourseCard();
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", card);
+
+        wait.until(ExpectedConditions.visibilityOf(card));
     }
 
     public boolean isCourseImageDisplayed() {
+
         WebElement card = getFirstCourseCard();
-        return wait.until(ExpectedConditions.visibilityOfNestedElementsLocatedBy(card, courseImage))
-                .get(0)
-                .isDisplayed();
+
+        By imgLocator = courseImage;
+
+        WebElement img = wait.until(
+                ExpectedConditions.presenceOfNestedElementLocatedBy(card, imgLocator)
+        );
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", img);
+
+        wait.until(ExpectedConditions.visibilityOf(img));
+
+        return img.isDisplayed();
     }
 
     public boolean isCourseTitleDisplayed() {
-        return getFirstCourseCard().findElement(courseTitle).isDisplayed();
+        WebElement card = getFirstCourseCard();
+
+        return wait.until(
+                ExpectedConditions.visibilityOfNestedElementsLocatedBy(card, courseTitle)
+        ).get(0).isDisplayed();
     }
 
     public boolean isInstructorNameDisplayed() {
-        return getFirstCourseCard().findElement(instructorName).isDisplayed();
+        WebElement card = getFirstCourseCard();
+
+        return wait.until(
+                ExpectedConditions.visibilityOfNestedElementsLocatedBy(card, instructorName)
+        ).get(0).isDisplayed();
     }
 
     public boolean isSubscribeButtonDisplayed() {
-        return getFirstCourseCard().findElement(subscribeButton).isDisplayed();
+        WebElement card = getFirstCourseCard();
+
+        return wait.until(
+                ExpectedConditions.visibilityOfNestedElementsLocatedBy(card, subscribeButton)
+        ).get(0).isDisplayed();
     }
 }

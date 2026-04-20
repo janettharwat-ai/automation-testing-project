@@ -1,12 +1,8 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class HomePage {
 
@@ -18,12 +14,12 @@ public class HomePage {
         this.wait = wait;
     }
 
-    By joinUsButton = By.xpath("//a[@href='/ar/auth/login?redirect=/join-as-instructor']");
+    By joinUsButton = By.xpath("//a[contains(@href,'join-as-instructor')]");
 
     public void clickJoinUs() {
 
         WebElement joinUsBtn = wait.until(
-                ExpectedConditions.presenceOfElementLocated(joinUsButton)
+                ExpectedConditions.visibilityOfElementLocated(joinUsButton)
         );
 
         ((JavascriptExecutor) driver)

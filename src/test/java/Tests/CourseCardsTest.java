@@ -14,7 +14,7 @@ public class CourseCardsTest extends BaseTest {
 
         CourseCardsPage courseCardsPage = new CourseCardsPage(driver);
 
-        courseCardsPage.getFirstCourseCard(); // force wait
+        courseCardsPage.waitForFirstCourseCard();
 
         Assert.assertTrue(courseCardsPage.isCourseImageDisplayed(),
                 "Course image is NOT displayed");

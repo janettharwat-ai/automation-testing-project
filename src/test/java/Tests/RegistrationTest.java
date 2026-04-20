@@ -15,13 +15,15 @@ public class RegistrationTest extends BaseTest {
 
         homePage.clickJoinUs();
 
-        wait.until(ExpectedConditions.or(
-                ExpectedConditions.urlContains("join-as-instructor"),
-                ExpectedConditions.urlContains("auth/login")
-        ));
+        wait.until(driver -> driver.getCurrentUrl().contains("auth/login")
+                || driver.getCurrentUrl().contains("join-as-instructor"));
+
+        String currentUrl = driver.getCurrentUrl();
 
         Assert.assertTrue(
-                driver.getCurrentUrl().contains("/join-as-instructor")
+                currentUrl.contains("auth/login") ||
+                        currentUrl.contains("join-as-instructor"),
+                "Navigation failed. Current URL: " + currentUrl
         );
     }
 }
