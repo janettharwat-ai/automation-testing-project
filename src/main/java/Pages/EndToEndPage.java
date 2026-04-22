@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 import java.time.Duration;
@@ -24,10 +25,13 @@ public class EndToEndPage {
     By cartCourseTitles = By.xpath("//a[contains(@href,'/courses/')]");
     By successToast = By.xpath("//*[contains(text(),'تمت') or contains(text(),'added') or contains(text(),'نجاح')]");
 
+
+    @Step("Open login page")
     public void openLoginPage() {
         driver.get("https://eyouthlearning.com/ar/auth/login?redirect=/ar");
     }
 
+    @Step("Login with email: {0}")
     public void login(String email, String password) {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailField)).sendKeys(email);
@@ -37,6 +41,7 @@ public class EndToEndPage {
         wait.until(ExpectedConditions.urlContains("/ar"));
     }
 
+    @Step("Open all courses page")
     public void openAllCourses() {
 
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(allCoursesBtn));
@@ -45,6 +50,7 @@ public class EndToEndPage {
         wait.until(ExpectedConditions.urlContains("courses"));
     }
 
+    @Step("Subscribe to first course and return course name")
     public String subscribeToFirstCourse() {
 
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(firstSubscribeBtn));
@@ -61,6 +67,7 @@ public class EndToEndPage {
         return courseName;
     }
 
+    @Step("Go to cart page")
     public void goToCart() {
 
         WebElement cart = wait.until(
@@ -76,6 +83,7 @@ public class EndToEndPage {
         ));
     }
 
+    @Step("Verify course '{0}' is added to cart")
     public boolean isCourseAddedToCart(String expectedCourse) {
 
         wait.until(driver -> driver.findElements(cartCourseTitles).size() > 0);

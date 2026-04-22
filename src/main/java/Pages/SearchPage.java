@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+
 public class SearchPage {
+
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -19,8 +22,12 @@ public class SearchPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+
     private By searchInput = By.xpath("//input[@placeholder='بحث عن الدورات التدريبية']");
     private By resultsText = By.xpath("//*[contains(text(),'البنك')]");
+
+
+    @Step("Enter keyword '{0}' and press Enter")
 
     public void search(String keyword) {
         WebElement input = wait.until(
@@ -31,6 +38,8 @@ public class SearchPage {
         input.sendKeys(keyword);
         input.sendKeys(Keys.ENTER);
     }
+
+    @Step("Verify search results are displayed")
 
     public boolean isSearchResultDisplayed() {
         return wait.until(

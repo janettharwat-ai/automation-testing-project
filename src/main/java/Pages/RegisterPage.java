@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
@@ -11,7 +12,6 @@ public class RegisterPage {
     WebDriver driver;
     WebDriverWait wait;
     Actions actions;
-
     public RegisterPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -29,6 +29,8 @@ public class RegisterPage {
     By genderField = By.xpath("//button[.//span[contains(text(),'النوع')]]");
     By usernameError = By.xpath("//p[contains(text(),'الاسم مطلوب')]");
 
+
+    @Step("Click on element")
     private void click(By locator) {
 
         WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -47,6 +49,7 @@ public class RegisterPage {
         }
     }
 
+    @Step("Select option: {0}")
     private void selectRadixOption(String value) {
 
         WebDriverWait localWait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -77,22 +80,26 @@ public class RegisterPage {
         }
     }
 
+    @Step("Enter email: {0}")
     public void enterEmail(String email) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailField)).sendKeys(email);
     }
 
+    @Step("Enter phone: {0}")
     public void enterPhone(String phone) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(phoneField)).sendKeys(phone);
     }
 
+    @Step("Enter password")
     public void enterPassword(String password) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField)).sendKeys(password);
     }
 
+    @Step("Enter confirm password")
     public void enterConfirmPassword(String password) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmPasswordField)).sendKeys(password);
     }
-
+    @Step("Select country: {0}")
     public void selectCountry(String country) {
         click(countryField);
         selectRadixOption(country);
@@ -104,19 +111,23 @@ public class RegisterPage {
         }
     }
 
+    @Step("Select governorate: {0}")
     public void selectGovernorate(String gov) {
         click(governorateField);
         selectRadixOption(gov);
     }
 
+    @Step("Select gender: {0}")
     public void selectGender(String gender) {
         click(genderField);
         selectRadixOption(gender);
     }
-
+    @Step("Click on create account button")
     public void clickCreate() {
         click(createButton);
     }
+
+    @Step("Get username validation error message")
 
     public String getUsernameErrorMessage() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(usernameError))

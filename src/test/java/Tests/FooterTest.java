@@ -2,6 +2,7 @@ package Tests;
 
 import Base.BaseTest;
 import Pages.FooterPage;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,6 +10,12 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class FooterTest extends BaseTest {
+
+    @Epic("UI")
+    @Feature("Footer Links")
+    @Description("Verify that Facebook & LinkedIn Links in footer redirects correctly")
+    @Severity(SeverityLevel.TRIVIAL)
+
 
     private void switchToNewTab() {
         new org.openqa.selenium.support.ui.WebDriverWait(driver, Duration.ofSeconds(10))

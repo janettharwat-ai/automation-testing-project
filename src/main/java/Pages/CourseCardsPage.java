@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,10 +24,13 @@ public class CourseCardsPage {
     By instructorName = By.xpath(".//h6");
     By subscribeButton = By.xpath(".//button");
 
+
+    @Step("Get first course card")
     public WebElement getFirstCourseCard() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(firstCourseCard));
     }
 
+    @Step("Scroll and wait for first course card")
     public void waitForFirstCourseCard() {
         WebElement card = getFirstCourseCard();
 
@@ -36,6 +40,7 @@ public class CourseCardsPage {
         wait.until(ExpectedConditions.visibilityOf(card));
     }
 
+    @Step("Verify course image is displayed")
     public boolean isCourseImageDisplayed() {
 
         WebElement card = getFirstCourseCard();
@@ -54,6 +59,7 @@ public class CourseCardsPage {
         return img.isDisplayed();
     }
 
+    @Step("Verify course title is displayed")
     public boolean isCourseTitleDisplayed() {
         WebElement card = getFirstCourseCard();
 
@@ -62,6 +68,7 @@ public class CourseCardsPage {
         ).get(0).isDisplayed();
     }
 
+    @Step("Verify instructor name is displayed")
     public boolean isInstructorNameDisplayed() {
         WebElement card = getFirstCourseCard();
 
@@ -70,6 +77,7 @@ public class CourseCardsPage {
         ).get(0).isDisplayed();
     }
 
+    @Step("Verify subscribe button is displayed")
     public boolean isSubscribeButtonDisplayed() {
         WebElement card = getFirstCourseCard();
 

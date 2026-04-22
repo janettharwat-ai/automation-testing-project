@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,7 @@ public class EmptyFields {
     By passwordRequiredError = By.xpath("//p[contains(text(),'كلمة المرور مطلوبة')]");
 
 
+    @Step("Click login button without entering credentials")
     public void clickLogin() {
         WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(loginButton));
 
@@ -34,10 +36,12 @@ public class EmptyFields {
         }
     }
 
+    @Step("Check email required error is displayed")
     public boolean  isEmailErrorDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(emailRequiredError)).isDisplayed();
     }
 
+    @Step("Check password required error is displayed")
     public boolean isPasswordErrorDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(passwordRequiredError)).isDisplayed();
     }

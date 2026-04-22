@@ -2,11 +2,19 @@ package Tests;
 
 import Pages.HomePage;
 import Base.BaseTest;
+import io.qameta.allure.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RegistrationTest extends BaseTest {
+
+
+    @Epic("Authentication")
+    @Feature("Signup")
+    @Description("Verify that user can open signup page")
+    @Severity(SeverityLevel.NORMAL)
+
 
     @Test
     public void testOpenSignupPage() {

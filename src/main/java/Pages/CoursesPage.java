@@ -1,5 +1,6 @@
-package pages;
+package Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,12 +22,15 @@ public class CoursesPage {
     private By firstCourse = By.xpath("(//a[contains(@href,'/course')])[1]");
     private By courseDetailsSection = By.xpath("//*[contains(text(),'حول الدورة')]");
 
+
+    @Step("Click on All Courses button")
     public void clickAllCourses() {
 
         wait.until(ExpectedConditions.elementToBeClickable(allCoursesBtn)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(coursesContainer));
     }
 
+    @Step("Click on first course card")
     public void clickFirstCourse() {
 
         WebElement course = wait.until(
@@ -46,12 +50,14 @@ public class CoursesPage {
         }
     }
 
+    @Step("Verify course details page is opened")
     public boolean isCourseDetailsPageOpened() {
         return wait.until(driver ->
                 driver.getCurrentUrl().contains("/course")
         );
     }
 
+    @Step("Verify course details section is visible")
     public boolean isCourseDetailsSectionVisible() {
         return wait.until(
                 ExpectedConditions.visibilityOfElementLocated(courseDetailsSection)

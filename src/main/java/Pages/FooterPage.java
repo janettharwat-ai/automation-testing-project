@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +22,8 @@ public class FooterPage {
     By facebookIcon = By.xpath("//a[contains(@href,'facebook')]");
     By linkedinIcon = By.xpath("//a[contains(@href,'linkedin')]");
 
+
+    @Step("Click on social media icon")
     private void clickSocial(By locator) {
 
         WebElement el = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -39,10 +42,12 @@ public class FooterPage {
         }
     }
 
+    @Step("Click on Facebook icon")
     public void clickFacebook() {
         clickSocial(facebookIcon);
     }
 
+    @Step("Click on LinkedIn icon")
     public void clickLinkedIn() {
         clickSocial(linkedinIcon);
     }

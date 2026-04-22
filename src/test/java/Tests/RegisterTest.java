@@ -2,10 +2,17 @@ package Tests;
 
 import Base.BaseTest;
 import Pages.RegisterPage;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RegisterTest extends BaseTest {
+
+    @Epic("Authentication")
+    @Feature("Registration Validation")
+    @Description("Verify that validation message appears when username field is left empty")
+    @Severity(SeverityLevel.CRITICAL)
+
 
     @Test
     public void registerWithoutUsername_shouldShowValidationError() {

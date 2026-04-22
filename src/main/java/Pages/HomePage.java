@@ -1,5 +1,6 @@
 package Pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,6 +17,8 @@ public class HomePage {
 
     By joinUsButton = By.xpath("//a[contains(@href,'join-as-instructor')]");
 
+
+    @Step("Click on Join Us button")
     public void clickJoinUs() {
 
         WebElement joinUsBtn = wait.until(

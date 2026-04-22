@@ -2,10 +2,18 @@ package Tests;
 
 import Base.BaseTest;
 import Pages.EmptyFields;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class EmptyFieldsTest extends BaseTest {
+
+
+    @Epic("Authentication")
+    @Feature("Login Validation")
+    @Description("Verify validation messages appear when login fields are empty")
+    @Severity(SeverityLevel.CRITICAL)
+
 
     @Test
     public void loginWithEmptyFields_shouldShowValidationErrors() {
